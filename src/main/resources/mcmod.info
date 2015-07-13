@@ -1,0 +1,16 @@
+[
+{
+  "modid": "OmniGoggles",
+  "name": "Omni-Goggles",
+  "description": "Adds 'Omni-Armor' and an 'Omni-Tool' that merges armors and tools from various mods.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "https://mods.io/mods/1149",
+  "updateUrl": "",
+  "authorList": ["Selim_042"],
+  "credits": "Thanks to Element_42 & AquaticAbyss for textures.",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

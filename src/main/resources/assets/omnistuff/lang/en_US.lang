@@ -1,0 +1,18 @@
+item.omniGoggles.name=§6Omni-Goggles§r
+item.omniChestplate.name=§6Omni-Chestplate§r
+
+item.omniTool.name=§6Omni-Tool§r
+
+item.bindingCatalyst.name=Binding Catalyst
+item.paxelModule.name=Paxel Module
+item.wrenchModule.name=Wrench Module
+item.potionsModule.name=Potions Module
+item.revealingModule.name=Revealing Module
+item.terminalModule.name=Terminal Module
+item.vanillaUtilsModule.name=Vanilla Utilities Module
+
+key.categories.OmniStuff=Omni-Stuff
+key.nightVisionToggle=Toggle Night Vision Module
+key.switchToolMode=Switch 'Omni-Tool' Mode
+
+itemGroup.omniStuffTab=Omni-Stuff
