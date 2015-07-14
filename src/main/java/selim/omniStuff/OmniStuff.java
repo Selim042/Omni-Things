@@ -22,6 +22,8 @@ import selim.omniStuff.keys.KeyBindings;
 import selim.omniStuff.keys.KeyInputHandler;
 import selim.omniStuff.proxy.CommonProxy;
 import selim.omniStuff.tool.OmniTool;
+import selim.omniStuff.leggings.OmniLeggings;
+import selim.omniStuff.boots.OmniBoots;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
@@ -66,6 +68,8 @@ public class OmniStuff {
     	// Register Items
     	public static Item omniGoggles = new OmniGoggles();
     	public static Item omniChestplate = new OmniChestplate();
+    	public static Item omniLeggings = new OmniLeggings();
+    	public static Item omniBoots = new OmniBoots();
     	
     	public static Item omniTool = new OmniTool();
     	
@@ -107,7 +111,9 @@ public class OmniStuff {
                 
                 // Register Items
                 GameRegistry.registerItem(omniGoggles, "omniGoggles");
-                //GameRegistry.registerItem(omniChestplate, "omniChestplate");
+                GameRegistry.registerItem(omniChestplate, "omniChestplate");
+                GameRegistry.registerItem(omniLeggings, "omniLeggings");
+                GameRegistry.registerItem(omniBoots, "omniBoots");
                 
                 GameRegistry.registerItem(omniTool, "omniTool");
                 

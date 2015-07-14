@@ -109,6 +109,6 @@ public class MyRecipies{
 	public static void addCustomHandlers() {
 		GameRegistry.addRecipe(new GoggleCrafting());
 		GameRegistry.addRecipe(new ToolCrafting());
-		//GameRegistry.addRecipe(new ChestplateCrafting());
+		GameRegistry.addRecipe(new ChestplateCrafting());
 	}
 }

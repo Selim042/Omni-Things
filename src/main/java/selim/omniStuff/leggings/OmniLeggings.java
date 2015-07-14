@@ -1,13 +1,13 @@
 package selim.omniStuff.leggings;
 
+import selim.omniStuff.OmniStuff;
 import net.minecraft.item.ItemArmor;
 
 public class OmniLeggings extends ItemArmor {
 
 	//potions module
-	public OmniLeggings(ArmorMaterial p_i45325_1_, int p_i45325_2_,
-			int p_i45325_3_) {
-		super(p_i45325_1_, p_i45325_2_, p_i45325_3_);
+	public OmniLeggings() {
+		super(OmniStuff.omniArmorMaterial, 0, 0);
 		// TODO Auto-generated constructor stub
 	}
 
