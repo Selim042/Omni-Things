@@ -192,35 +192,35 @@ public class OmniGoggles extends ItemArmor implements
 	@Override
 	public int getVisDiscount(ItemStack stack, EntityPlayer player,
 			Aspect aspect) {
-		// TODO Auto-generated method stub
-		if (stack.stackTagCompound != null && stack.stackTagCompound.getBoolean("gogglesOfRevealing")) {
-			return 5;
+		int currentEnergy = this.getEnergyStored(stack);
+		if (currentEnergy > 0) {
+			if (stack.stackTagCompound != null && stack.stackTagCompound.getBoolean("gogglesOfRevealing")) {
+				return 5;
+			}
 		}
-		else {
-			return 0;
-		}
+		return 0;
 	}
 
 	@Override
 	public boolean showIngamePopups(ItemStack stack, EntityLivingBase player) {
-		// TODO Auto-generated method stub
-		if (stack.stackTagCompound != null && stack.stackTagCompound.getBoolean("gogglesOfRevealing")) {
-			return true;
+		int currentEnergy = this.getEnergyStored(stack);
+		if (currentEnergy > 0) {
+			if (stack.stackTagCompound != null && stack.stackTagCompound.getBoolean("gogglesOfRevealing")) {
+				return true;
+			}
 		}
-		else {
-			return false;
-		}
+		return false;
 	}
 
 	@Override
 	public boolean showNodes(ItemStack stack, EntityLivingBase player) {
-		// TODO Auto-generated method stub
-		if (stack.stackTagCompound != null && stack.stackTagCompound.getBoolean("gogglesOfRevealing")) {
-			return true;
+		int currentEnergy = this.getEnergyStored(stack);
+		if (currentEnergy > 0) {
+			if (stack.stackTagCompound != null && stack.stackTagCompound.getBoolean("gogglesOfRevealing")) {
+				return true;
+			}
 		}
-		else {
-			return false;
-		}
+		return false;
 	}
 
 	/* OpenPeripherals */
