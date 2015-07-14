@@ -6,6 +6,8 @@ import net.minecraft.item.ItemStack;
 import selim.omniStuff.OmniStuff;
 import selim.omniStuff.chestplate.ChestplateCrafting;
 import selim.omniStuff.helmet.GoggleCrafting;
+import selim.omniStuff.boots.BootsCrafting;
+import selim.omniStuff.leggings.LeggingsCrafting;
 import selim.omniStuff.tool.ToolCrafting;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -108,7 +110,10 @@ public class MyRecipies{
 	
 	public static void addCustomHandlers() {
 		GameRegistry.addRecipe(new GoggleCrafting());
-		GameRegistry.addRecipe(new ToolCrafting());
 		GameRegistry.addRecipe(new ChestplateCrafting());
+		GameRegistry.addRecipe(new LeggingsCrafting());
+		GameRegistry.addRecipe(new BootsCrafting());
+		
+		GameRegistry.addRecipe(new ToolCrafting());
 	}
 }

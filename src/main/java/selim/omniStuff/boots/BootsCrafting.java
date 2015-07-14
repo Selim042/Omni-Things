@@ -1,25 +1,23 @@
-package selim.omniStuff.chestplate;
+package selim.omniStuff.boots;
 
-import selim.omniStuff.OmniStuff;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import selim.omniStuff.OmniStuff;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class ChestplateCrafting implements IRecipe {
+public class BootsCrafting implements IRecipe {
 	
 	@Override
 	public boolean matches(InventoryCrafting p_77569_1_, World p_77569_2_) {
-		ItemStack referenceStack = new ItemStack(OmniStuff.omniChestplate);
+		ItemStack referenceStack = new ItemStack(OmniStuff.omniBoots);
 		boolean valid = false;
 		ItemStack stack4 = p_77569_1_.getStackInSlot(4);
-		if ((stack4 !=null) && (stack4.getItem().equals(referenceStack.getItem()))) {
+		if ((stack4 !=null) && (stack4.getItem() == referenceStack.getItem())) {
 			valid = true;
 		}
 		return valid;
@@ -27,23 +25,21 @@ public class ChestplateCrafting implements IRecipe {
 
 	@Override
 	public ItemStack getCraftingResult(InventoryCrafting craftingTable) {
-		Item[] upgrades = {OmniStuff.parachuteModule};
-		String[] upgradeID = {"parachuteModule"};
+		Item[] upgrades = {OmniStuff.potionsModule,
+							OmniStuff.fallModule};
+		String[] upgradeID = {"potionsModule", "fallModule"};
 		
 		boolean valid = true;
 		ItemStack stack4 = craftingTable.getStackInSlot(4);
 		Item stack4Item = stack4.getItem();
-		ItemStack result = new ItemStack(OmniStuff.omniChestplate);
-		if (stack4Item.equals(OmniStuff.omniChestplate)) {
+		ItemStack result = new ItemStack(OmniStuff.omniBoots);
+		if (stack4Item.equals(OmniStuff.omniBoots)) {
 			ItemStack[] upgradeSlots = {craftingTable.getStackInSlot(0), craftingTable.getStackInSlot(1), craftingTable.getStackInSlot(2),
 					craftingTable.getStackInSlot(3), craftingTable.getStackInSlot(5),
 					craftingTable.getStackInSlot(6), craftingTable.getStackInSlot(7), craftingTable.getStackInSlot(8)};
 			if (stack4.stackTagCompound != null) {
 				NBTTagCompound oldNBT = (NBTTagCompound) stack4.stackTagCompound.copy();
 				result.stackTagCompound = oldNBT;
-			}
-			else {
-				result.stackTagCompound = new NBTTagCompound();
 			}
 			for (int i = 0; i < upgradeSlots.length; i++) {
 				for (int u = 0; u < upgrades.length; u++) {
@@ -70,6 +66,6 @@ public class ChestplateCrafting implements IRecipe {
 
 	@Override
 	public ItemStack getRecipeOutput() {
-		return new ItemStack(OmniStuff.omniChestplate);
+		return new ItemStack(OmniStuff.omniBoots);
 	}
 }

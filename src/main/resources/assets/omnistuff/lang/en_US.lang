@@ -1,5 +1,7 @@
 item.omniGoggles.name=§6Omni-Goggles§r
 item.omniChestplate.name=§6Omni-Chestplate§r
+item.omniLeggings.name=§6Omni-Leggings§r
+item.omniBoots.name=§6Omni-Boots§r
 
 item.omniTool.name=§6Omni-Tool§r
 
@@ -10,6 +12,9 @@ item.potionsModule.name=Potions Module
 item.revealingModule.name=Revealing Module
 item.terminalModule.name=Terminal Module
 item.vanillaUtilsModule.name=Vanilla Utilities Module
+item.fallModule.name=Fall Module
+item.stepAssistModule.name=Step Assist Module
+item.parachuteModule.name=Parachute Module
 
 key.categories.OmniStuff=Omni-Stuff
 key.nightVisionToggle=Toggle Night Vision Module

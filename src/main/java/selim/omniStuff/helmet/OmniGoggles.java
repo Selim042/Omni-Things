@@ -37,8 +37,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class OmniGoggles extends ItemArmor implements
-	IRevealer, IGoggles, IVisDiscountGear, ITerminalItem/*,
-	IEnergyContainerItem*/ {
+	IRevealer, IGoggles, IVisDiscountGear, ITerminalItem,
+	IEnergyContainerItem {
 	
 	String[] neiLore = {"One helmet with many", "HUDs from many mods."};
 	String[] craftingHelp = {"Put goggles in middle", "slot of crafting table,",
@@ -46,15 +46,13 @@ public class OmniGoggles extends ItemArmor implements
 	
 	String[] moduleID = {"gogglesOfRevealing", "potionsModule", "terminalGlasses"};
 	
-	int rfIn = 80;
-	int rfOut = 80;
+	int rfIn = 1280;
+	int rfOut = 640;
 	int rfPerModule = 5;
-	int maxRfStored = 1000000;
+	int maxRfStored = 4000000;
 	
 	public OmniGoggles() {
 		super(OmniStuff.omniArmorMaterial, 0, 0);
-		setMaxDamage(0);
-		
 		setUnlocalizedName("omniGoggles");
 		setCreativeTab(CreativeTabs.tabCombat);
 		setCreativeTab(OmniStuff.omniStuffTab);
@@ -62,10 +60,6 @@ public class OmniGoggles extends ItemArmor implements
 	}
 	
 	private static final String OPENP_TAG = "openp";
-	
-	public int getMaxItemUseDuration() {return -1;}
-	
-	public int getMaxDamage() {return -1;}
 	
 	@Override
 	public String getArmorTexture(ItemStack itemStack, Entity entity, int slot, String type) {
@@ -106,11 +100,11 @@ public class OmniGoggles extends ItemArmor implements
             		list.add(craftingHelp[i]);
             	}
             }
-/*			int energyStored = itemStack.stackTagCompound.getInteger("energy");
+			int energyStored = this.getEnergyStored(itemStack);
             if (Loader.isModLoaded("ThermalExpansion")) {
-            	list.add("Charge: " + energyStored + "/" + maxRfStored + " RF");
+            	list.add("Charge: " + energyStored + " / " + maxRfStored + " RF");
             	list.add("Uses " + (numModules * rfPerModule) + " RF/t");
-            } */
+            }
 		}
 		else {
 			for (int i = 0; i < neiLore.length; i++) {
@@ -142,6 +136,10 @@ public class OmniGoggles extends ItemArmor implements
 		if (itemStack.stackTagCompound.getBoolean("potionsModule")) {
 			player.addPotionEffect(new PotionEffect(Potion.waterBreathing.id, 320, 0, true));
 		}
+		int currentEnergy = this.getEnergyStored(itemStack);
+		if (currentEnergy > 0) {
+			itemStack.stackTagCompound.setInteger("Energy", currentEnergy - 15);
+		}
 	}
 	
 	@Override
@@ -157,12 +155,38 @@ public class OmniGoggles extends ItemArmor implements
 		else {
 			itemStack.stackTagCompound = new NBTTagCompound();
 		    itemStack.stackTagCompound.setInteger("numModules", 0);
-//		    itemStack.stackTagCompound.setInteger("energy", 0);
+		    itemStack.stackTagCompound.setInteger("Energy", 0);
 		    for (int i = 0; i < moduleID.length; i++) {
 		    	itemStack.stackTagCompound.setBoolean(moduleID[i], false);
 		    }
 		}
 	}
+	
+	@Override
+	public int getDisplayDamage(ItemStack stack) {return this.getMaxEnergyStored(stack) - this.getEnergyStored(stack);}
+	
+	@Override
+	public int getMaxDamage(ItemStack stack) {return this.getMaxEnergyStored(stack);}
+	
+	@Override
+	public boolean isDamaged(ItemStack stack) {
+		if (stack.stackTagCompound == null) {
+			return false;
+		}
+		return true;
+	}
+	
+	@Override
+	public boolean showDurabilityBar(ItemStack stack) {
+		if (stack.stackTagCompound == null) {
+			return false;
+		}
+		return true;
+	}
+	
+	/*public int getDamageReductionAmount(int p_78044_1_) {
+		return p_78044_1_;
+    }*/
 	
     /* Thaumcraft */
 	@Override
@@ -227,18 +251,18 @@ public class OmniGoggles extends ItemArmor implements
 	}
 
 	/* Thermal Expansion */
-	/*@Override
+	@Override
 	public int receiveEnergy(ItemStack container, int maxReceive, boolean simulate) {
 
 		if (container.stackTagCompound == null) {
 			container.stackTagCompound = new NBTTagCompound();
 		}
-		int energy = container.stackTagCompound.getInteger("energy");
+		int energy = container.stackTagCompound.getInteger("Energy");
 		int energyReceived = Math.min(maxRfStored - energy, Math.min(this.rfIn, maxReceive));
 
 		if (!simulate) {
 			energy += energyReceived;
-			container.stackTagCompound.setInteger("energy", energy);
+			container.stackTagCompound.setInteger("Energy", energy);
 		}
 		return energyReceived;
 	}
@@ -246,10 +270,10 @@ public class OmniGoggles extends ItemArmor implements
 	@Override
 	public int extractEnergy(ItemStack container, int maxExtract, boolean simulate) {
 
-		if (container.stackTagCompound == null || !container.stackTagCompound.hasKey("energy")) {
+		if (container.stackTagCompound == null || !container.stackTagCompound.hasKey("Energy")) {
 			return 0;
 		}
-		int energy = container.stackTagCompound.getInteger("energy");
+		int energy = container.stackTagCompound.getInteger("Energy");
 		int energyExtracted = Math.min(energy, Math.min(this.rfOut, maxExtract));
 
 		if (!simulate) {
@@ -262,17 +286,15 @@ public class OmniGoggles extends ItemArmor implements
 	@Override
 	public int getEnergyStored(ItemStack container) {
 		if (container.stackTagCompound != null) {
-			int storedEnergy = container.stackTagCompound.getInteger("energy");
+			int storedEnergy = container.stackTagCompound.getInteger("Energy");
 			int numModules = container.stackTagCompound.getInteger("numModules");
-			
-			storedEnergy = storedEnergy - (numModules * rfPerModule);
 		}
-		return 0;
+		return container.stackTagCompound.getInteger("Energy");
 	}
 
 	@Override
 	public int getMaxEnergyStored(ItemStack container) {
 		// TODO Auto-generated method stub
 		return maxRfStored;
-	} */
+	}
 }

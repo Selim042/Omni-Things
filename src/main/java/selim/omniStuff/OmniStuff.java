@@ -7,23 +7,17 @@ import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.EnumHelper;
+import selim.omniStuff.boots.OmniBoots;
 import selim.omniStuff.charger.ChargerBlock;
 import selim.omniStuff.chestplate.OmniChestplate;
 import selim.omniStuff.crafting.MyRecipies;
 import selim.omniStuff.helmet.OmniGoggles;
-import selim.omniStuff.items.BindingCatalyst;
-import selim.omniStuff.items.PaxelModule;
-import selim.omniStuff.items.PotionsModule;
-import selim.omniStuff.items.RevealingModule;
-import selim.omniStuff.items.TerminalModule;
-import selim.omniStuff.items.VanillaUtilsModule;
-import selim.omniStuff.items.WrenchModule;
+import selim.omniStuff.items.*;
 import selim.omniStuff.keys.KeyBindings;
 import selim.omniStuff.keys.KeyInputHandler;
+import selim.omniStuff.leggings.OmniLeggings;
 import selim.omniStuff.proxy.CommonProxy;
 import selim.omniStuff.tool.OmniTool;
-import selim.omniStuff.leggings.OmniLeggings;
-import selim.omniStuff.boots.OmniBoots;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
@@ -47,9 +41,11 @@ public class OmniStuff {
         public static CommonProxy proxy;
         
         public static final ArmorMaterial omniArmorMaterial = EnumHelper.addArmorMaterial(
-        		"omniArmorMaterial", -1, new int[]{2, 6, 5, 2}, 5);
-        public static final ArmorMaterial protectiveOmniArmorMaterial = EnumHelper.addArmorMaterial(
-        		"protectiveOmniArmorMaterial", -1, new int[]{4, 8, 7, 4}, 10);
+        		"omniArmorMaterial", -1, new int[]{1, 5, 4, 1}, 0);
+        public static final ArmorMaterial omniArmorMaterialTeir2 = EnumHelper.addArmorMaterial(
+        		"omniArmorMaterialTier2", -1, new int[]{2, 6, 5, 2}, 0);
+        public static final ArmorMaterial omniArmorMaterialTeir3 = EnumHelper.addArmorMaterial(
+        		"omniArmorMaterialTier3", -1, new int[]{4, 8, 7, 4}, 0);
         
         public static final ToolMaterial omniToolMaterial = EnumHelper.addToolMaterial(
         		"omniToolMaterial", 10, -1, 15.0F, 10.0F, 15);
@@ -80,6 +76,9 @@ public class OmniStuff {
     	public static Item revealingModule = new RevealingModule();
     	public static Item terminalModule = new TerminalModule();
     	public static Item vanillaUtilsModule = new VanillaUtilsModule();
+    	public static Item stepModule = new StepAssistModule();
+    	public static Item fallModule = new FallModule();
+    	public static Item parachuteModule = new ParachuteModule();
     	
     	// Register Blocks
     	public static Block charger = new ChargerBlock();
@@ -130,6 +129,9 @@ public class OmniStuff {
                 	GameRegistry.registerItem(terminalModule, "terminalModule");
                 }
 //                GameRegistry.registerItem(vanillaUtilsModule, "vanillaUtilsModule");
+                GameRegistry.registerItem(stepModule, "stepModule");
+                GameRegistry.registerItem(fallModule, "fallModule");
+                GameRegistry.registerItem(parachuteModule,  "parachuteModule");
                 
                 // Register Blocks
                 //GameRegistry.registerBlock(charger, "charger");
