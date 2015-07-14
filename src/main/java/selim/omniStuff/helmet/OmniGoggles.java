@@ -126,18 +126,18 @@ public class OmniGoggles extends ItemArmor implements
 	
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
-		if (player instanceof EntityPlayerMP && itemStack.stackTagCompound.getBoolean("terminalGlasses")) {
-			Long guid = extractGuid(itemStack);
-			if (guid != null) MinecraftForge.EVENT_BUS.post(new TerminalRegisterEvent((EntityPlayerMP)player, guid));
-		}
-		if (itemStack.stackTagCompound.getBoolean("potionsModule") && KeyInputHandler.nightVisionToggle) {
-			player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 320, 0, true));
-		}
-		if (itemStack.stackTagCompound.getBoolean("potionsModule")) {
-			player.addPotionEffect(new PotionEffect(Potion.waterBreathing.id, 320, 0, true));
-		}
 		int currentEnergy = this.getEnergyStored(itemStack);
 		if (currentEnergy > 0) {
+			if (player instanceof EntityPlayerMP && itemStack.stackTagCompound.getBoolean("terminalGlasses")) {
+				Long guid = extractGuid(itemStack);
+				if (guid != null) MinecraftForge.EVENT_BUS.post(new TerminalRegisterEvent((EntityPlayerMP)player, guid));
+			}
+			if (itemStack.stackTagCompound.getBoolean("potionsModule") && KeyInputHandler.nightVisionToggle) {
+				player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 320, 0, true));
+			}
+			if (itemStack.stackTagCompound.getBoolean("potionsModule")) {
+				player.addPotionEffect(new PotionEffect(Potion.waterBreathing.id, 320, 0, true));
+			}
 			itemStack.stackTagCompound.setInteger("Energy", currentEnergy - 15);
 		}
 	}
@@ -184,9 +184,9 @@ public class OmniGoggles extends ItemArmor implements
 		return true;
 	}
 	
-	/*public int getDamageReductionAmount(int p_78044_1_) {
+	public int getDamageReductionAmount(int p_78044_1_) {
 		return p_78044_1_;
-    }*/
+    }
 	
     /* Thaumcraft */
 	@Override

@@ -88,11 +88,11 @@ public class OmniBoots extends ItemArmor implements IEnergyContainerItem {
 	
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
-		if (itemStack.stackTagCompound.getBoolean("potionsModule")) {
-			player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 320, 3, true));
-		}
 		int currentEnergy = this.getEnergyStored(itemStack);
 		if (currentEnergy > 0) {
+			if (itemStack.stackTagCompound.getBoolean("potionsModule")) {
+				player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 320, 3, true));
+			}
 			itemStack.stackTagCompound.setInteger("Energy", currentEnergy - 15);
 		}
 	}

@@ -26,7 +26,7 @@ public class OmniChestplate extends ItemArmor implements IEnergyContainerItem {
 
 	//flight, flux pack, glider, backpack
 	
-	String[] moduleID = {"potionsModule", "flight"};
+	String[] moduleID = {"potionsModule", "parachuteModule"};
 	
 	int rfIn = 1280;
 	int rfOut = 640;
@@ -107,14 +107,11 @@ public class OmniChestplate extends ItemArmor implements IEnergyContainerItem {
 	
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
-		if (player.getCurrentArmor(2).getItem().equals(OmniStuff.omniChestplate)) {
-			
-		}
-		else {
-			
-		}
 		int currentEnergy = this.getEnergyStored(itemStack);
 		if (currentEnergy > 0) {
+			if (player.isAirBorne && player.motionY < 0) {
+				player.motionY += .06;
+			}
 			itemStack.stackTagCompound.setInteger("Energy", currentEnergy - 15);
 		}
 	}
