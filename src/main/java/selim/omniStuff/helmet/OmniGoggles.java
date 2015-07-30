@@ -45,6 +45,7 @@ public class OmniGoggles extends ItemArmor implements
 							"then put any compatible", "module anywhere else."};
 	
 	String[] moduleID = {"gogglesOfRevealing", "potionsModule", "terminalGlasses"};
+	String[] standardRfModule = {/*"gogglesOfRevealing", */"potionsModule", "terminalGlasses"};
 	
 	int rfIn = 1280;
 	int rfOut = 640;
@@ -138,7 +139,9 @@ public class OmniGoggles extends ItemArmor implements
 			if (itemStack.stackTagCompound.getBoolean("potionsModule")) {
 				player.addPotionEffect(new PotionEffect(Potion.waterBreathing.id, 320, 0, true));
 			}
-			itemStack.stackTagCompound.setInteger("Energy", currentEnergy - 15);
+			if (!player.capabilities.isCreativeMode) {
+				itemStack.stackTagCompound.setInteger("Energy", currentEnergy - itemStack.stackTagCompound.getInteger("numModules") * rfPerModule);
+			}
 		}
 	}
 	

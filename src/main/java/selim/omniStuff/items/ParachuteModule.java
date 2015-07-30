@@ -19,7 +19,7 @@ public class ParachuteModule extends Item {
 		setCreativeTab(OmniStuff.omniStuffTab);
 	}
 	
-	String[] neiLore = {"Used on the 'Omni-Chestplate'.", "Causes the player to", "fall more slowly."};
+	String[] neiLore = {"Used on the 'Omni-Chestplate'.", "Causes the player to", "fall more slowly.", "Note: This will NOT", "reduce fall damage."};
 	
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean bool) {

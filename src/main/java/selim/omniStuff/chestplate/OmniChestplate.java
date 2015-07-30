@@ -111,8 +111,13 @@ public class OmniChestplate extends ItemArmor implements IEnergyContainerItem {
 		if (currentEnergy > 0) {
 			if (player.isAirBorne && player.motionY < 0) {
 				player.motionY += .06;
+				//itemStack.stackTagCompound.setInteger("Energy", currentEnergy - rfPerModule);
+				player.fallDistance /= 2;
+				//System.out.println(player.fallDistance);
 			}
-			itemStack.stackTagCompound.setInteger("Energy", currentEnergy - 15);
+			if (!player.capabilities.isCreativeMode) {
+				itemStack.stackTagCompound.setInteger("Energy", currentEnergy - itemStack.stackTagCompound.getInteger("numModules") * rfPerModule);
+			}
 		}
 	}
 	

@@ -28,6 +28,8 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -60,6 +62,8 @@ public class OmniStuff {
         
         private static int modGuiIndex = 0;
         public static final int ItemInventoryGuiIndex = modGuiIndex++;
+        
+        static SimpleNetworkWrapper thing = NetworkRegistry.INSTANCE.newSimpleChannel("omniThings");
         
     	// Register Items
     	public static Item omniGoggles = new OmniGoggles();
@@ -134,7 +138,7 @@ public class OmniStuff {
                 GameRegistry.registerItem(parachuteModule,  "parachuteModule");
                 
                 // Register Blocks
-                //GameRegistry.registerBlock(charger, "charger");
+                GameRegistry.registerBlock(charger, "charger");
                 
                 // Register Recipes
                 MyRecipies.addRecipies();
