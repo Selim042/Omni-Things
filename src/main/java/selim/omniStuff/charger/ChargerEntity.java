@@ -2,16 +2,18 @@ package selim.omniStuff.charger;
 
 import java.util.ArrayList;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.IEssentiaTransport;
-import vazkii.botania.api.mana.IManaReceiver;
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.TileEnergyHandler;
 
-public class ChargerEntity extends TileEnergyHandler implements /*IManaReceiver, */IEssentiaTransport {
+public class ChargerEntity extends TileEnergyHandler implements IInventory, /*IManaReceiver, */IEssentiaTransport {
 
 	int rfRate = 10;
 	int essentiaRate = 15;
@@ -19,19 +21,8 @@ public class ChargerEntity extends TileEnergyHandler implements /*IManaReceiver,
 	
 	protected EnergyStorage storage = new EnergyStorage(32000);
 	int maxRfRecieve = 800;
-	
-	private boolean aBoolean;
-    private byte aByte;
-    private short aShort;
-    private int anInt;
-    private long aLong;
-    private float aFloat;
-    private double aDouble;
-    private String aString;
-    private byte[] aByteArray;
-    private int[] anIntArray;
 
-    private ItemStack anItemStack;
+    private ItemStack storedItem;
 
     private ArrayList aList = new ArrayList();
     
@@ -40,6 +31,9 @@ public class ChargerEntity extends TileEnergyHandler implements /*IManaReceiver,
 
 		super.readFromNBT(nbt);
 		storage.readFromNBT(nbt);
+		
+		// ItemStack
+		this.storedItem = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("storedItem"));
 	}
 
 	@Override
@@ -47,12 +41,17 @@ public class ChargerEntity extends TileEnergyHandler implements /*IManaReceiver,
 
 		super.writeToNBT(nbt);
 		storage.writeToNBT(nbt);
+		
+		// ItemStack
+		NBTTagCompound stack = new NBTTagCompound();
+        this.storedItem.writeToNBT(stack);
+        nbt.setTag("storedItem", stack);
 	}
 	
 	@Override
 	public void updateEntity() {
 		if (!this.getWorldObj().isRemote) {
-			System.out.println(storage.getEnergyStored());
+			//System.out.println(storage.getEnergyStored());
 		}
 	}
 	
@@ -168,5 +167,77 @@ public class ChargerEntity extends TileEnergyHandler implements /*IManaReceiver,
 	@Override
 	public boolean renderExtendedTube() {
 		return false;
+	}
+
+	/* IInventory */
+	@Override
+	public int getSizeInventory() {
+		return 9;
+	}
+
+	@Override
+	public ItemStack getStackInSlot(int p_70301_1_) {
+		return null;
+	}
+
+	@Override
+    public ItemStack decrStackSize(int slot, int amt) {
+            ItemStack stack = getStackInSlot(slot);
+            if (stack != null) {
+                    if (stack.stackSize <= amt) {
+                            setInventorySlotContents(slot, null);
+                    } else {
+                            stack = stack.splitStack(amt);
+                            if (stack.stackSize == 0) {
+                                    setInventorySlotContents(slot, null);
+                            }
+                    }
+            }
+            return stack;
+    }
+
+	@Override
+	public ItemStack getStackInSlotOnClosing(int p_70304_1_) {
+		return null;
+	}
+
+	@Override
+	public void setInventorySlotContents(int p_70299_1_, ItemStack p_70299_2_) {
+		
+	}
+
+	@Override
+	public String getInventoryName() {
+		return null;
+	}
+
+	@Override
+	public boolean hasCustomInventoryName() {
+		return false;
+	}
+
+	@Override
+	public int getInventoryStackLimit() {
+		return 1;
+	}
+
+	@Override
+	public boolean isUseableByPlayer(EntityPlayer p_70300_1_) {
+		return false;
+	}
+
+	@Override
+	public void openInventory() {
+		
+	}
+
+	@Override
+	public void closeInventory() {
+		
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
+		return true;
 	}
 }

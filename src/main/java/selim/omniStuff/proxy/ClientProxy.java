@@ -1,5 +1,7 @@
 package selim.omniStuff.proxy;
 
+import cpw.mods.fml.common.network.NetworkRegistry;
+
 
 public class ClientProxy extends CommonProxy {
         

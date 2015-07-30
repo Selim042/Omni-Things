@@ -11,6 +11,7 @@ import selim.omniStuff.boots.OmniBoots;
 import selim.omniStuff.charger.ChargerBlock;
 import selim.omniStuff.chestplate.OmniChestplate;
 import selim.omniStuff.crafting.MyRecipies;
+import selim.omniStuff.gui.charger.HandlerGui;
 import selim.omniStuff.helmet.OmniGoggles;
 import selim.omniStuff.items.*;
 import selim.omniStuff.keys.KeyBindings;
@@ -66,7 +67,8 @@ public class OmniStuff {
         static SimpleNetworkWrapper thing = NetworkRegistry.INSTANCE.newSimpleChannel("omniThings");
         
     	// Register Items
-    	public static Item omniGoggles = new OmniGoggles();
+    	public static Item omniGoggles = new OmniGoggles(0,
+    			new String[]{"gogglesOfRevealing", "potionsModule", "terminalGlasses"});
     	public static Item omniChestplate = new OmniChestplate();
     	public static Item omniLeggings = new OmniLeggings();
     	public static Item omniBoots = new OmniBoots();
@@ -144,7 +146,8 @@ public class OmniStuff {
                 MyRecipies.addRecipies();
                 MyRecipies.addCustomHandlers();
                 
-                // no renderers or entities to register, but whatever
+                // Register GUI Handler
+                NetworkRegistry.INSTANCE.registerGuiHandler(this.instance, new HandlerGui());
 
                 proxy.registerRenderers();
                 proxy.registerTileEntities();
