@@ -3,7 +3,7 @@ package selim.omniStuff.proxy;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import selim.omniStuff.charger.ChargerEntity;
-import selim.omniStuff.charger.GuiBasic;
+import selim.omniStuff.charger.gui.GuiBasic;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 

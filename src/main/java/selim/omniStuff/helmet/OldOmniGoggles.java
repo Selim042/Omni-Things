@@ -2,28 +2,23 @@ package selim.omniStuff.helmet;
 
 import java.util.List;
 
-import cofh.api.energy.IEnergyContainerItem;
-import cofh.lib.util.helpers.StringHelper;
-import openmods.utils.ItemUtils;
-import openperipheral.addons.api.ITerminalItem;
-import openperipheral.addons.api.TerminalRegisterEvent;
-import openperipheral.addons.glasses.TerminalUtils;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import openperipheral.addons.api.ITerminalItem;
+import openperipheral.addons.api.TerminalRegisterEvent;
+import openperipheral.addons.glasses.TerminalUtils;
 import selim.omniStuff.ModInfo;
 import selim.omniStuff.OmniStuff;
 import selim.omniStuff.config.LoadConfig;
@@ -32,6 +27,8 @@ import thaumcraft.api.IGoggles;
 import thaumcraft.api.IVisDiscountGear;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.nodes.IRevealer;
+import cofh.api.energy.IEnergyContainerItem;
+import cofh.lib.util.helpers.StringHelper;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -234,7 +231,8 @@ public class OldOmniGoggles extends ItemArmor implements
 
 	@Override
 	public void bindToTerminal(ItemStack stack, long guid) {
-		NBTTagCompound tag = ItemUtils.getItemTag(stack);
+		if (stack.stackTagCompound == null) stack.stackTagCompound = new NBTTagCompound();
+		NBTTagCompound tag = stack.stackTagCompound;
 
 		NBTTagCompound openPTag = (NBTTagCompound)tag.getTag(OPENP_TAG);
 		if (openPTag == null) {
@@ -246,7 +244,8 @@ public class OldOmniGoggles extends ItemArmor implements
 	}
 	
 	private static Long extractGuid(ItemStack stack) {
-		NBTTagCompound tag = ItemUtils.getItemTag(stack);
+		if (stack.stackTagCompound == null) stack.stackTagCompound = new NBTTagCompound();
+		NBTTagCompound tag = stack.stackTagCompound;
 		if (!tag.hasKey(OPENP_TAG)) return null;
 
 		NBTTagCompound openp = tag.getCompoundTag(OPENP_TAG);

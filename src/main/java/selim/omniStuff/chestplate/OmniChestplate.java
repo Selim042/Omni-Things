@@ -55,11 +55,11 @@ public class OmniChestplate extends ItemArmor implements IEnergyContainerItem {
 		}
 		if (itemStack.stackTagCompound != null) {
 			list.add("Modules:");
-			boolean flight = itemStack.stackTagCompound.getBoolean("flight");
+			boolean flight = itemStack.stackTagCompound.getBoolean("item.flightModule");
             if (flight == true) {
             	list.add(" - Flight");
             }
-            boolean parachute = itemStack.stackTagCompound.getBoolean("parachuteModule");
+            boolean parachute = itemStack.stackTagCompound.getBoolean("item.parachuteModule");
             if (parachute) {
             	list.add(" - Parachute Module");
             }

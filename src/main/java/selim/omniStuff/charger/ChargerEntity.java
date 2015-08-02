@@ -87,25 +87,21 @@ public class ChargerEntity extends TileEnergyHandler implements IInventory, /*IM
 	/* IManaReceiver */
 /*	@Override
 	public int getCurrentMana() {
-		// TODO Auto-generated method stub
 		return storage.getEnergyStored() * manaRate;
 	}
 
 	@Override
 	public boolean isFull() {
-		// TODO Auto-generated method stub
 		return storage.getEnergyStored() >= storage.getMaxEnergyStored();
 	}
 
 	@Override
 	public void recieveMana(int mana) {
-		// TODO Auto-generated method stub
 		storage.modifyEnergyStored(storage.getEnergyStored() + (mana * manaRate));
 	}
 
 	@Override
 	public boolean canRecieveManaFromBursts() {
-		// TODO Auto-generated method stub
 		return !this.isFull();
 	} */
 
@@ -172,28 +168,28 @@ public class ChargerEntity extends TileEnergyHandler implements IInventory, /*IM
 	/* IInventory */
 	@Override
 	public int getSizeInventory() {
-		return 9;
+		return 2;
 	}
 
 	@Override
 	public ItemStack getStackInSlot(int p_70301_1_) {
-		return null;
+		return storedItem;
 	}
 
 	@Override
     public ItemStack decrStackSize(int slot, int amt) {
-            ItemStack stack = getStackInSlot(slot);
-            if (stack != null) {
-                    if (stack.stackSize <= amt) {
-                            setInventorySlotContents(slot, null);
-                    } else {
-                            stack = stack.splitStack(amt);
-                            if (stack.stackSize == 0) {
-                                    setInventorySlotContents(slot, null);
-                            }
-                    }
-            }
-            return stack;
+		ItemStack stack = getStackInSlot(slot);
+		if (stack != null) {
+			if (stack.stackSize <= amt) {
+				setInventorySlotContents(slot, null);
+			} else {
+				stack = stack.splitStack(amt);
+				if (stack.stackSize == 0) {
+					setInventorySlotContents(slot, null);
+				}
+			}
+		}
+		return stack;
     }
 
 	@Override
@@ -202,8 +198,11 @@ public class ChargerEntity extends TileEnergyHandler implements IInventory, /*IM
 	}
 
 	@Override
-	public void setInventorySlotContents(int p_70299_1_, ItemStack p_70299_2_) {
-		
+	public void setInventorySlotContents(int slot, ItemStack itemStack) {
+		if (slot == 0) {
+			this.storedItem = itemStack;
+		}
+		this.markDirty();
 	}
 
 	@Override
@@ -223,7 +222,7 @@ public class ChargerEntity extends TileEnergyHandler implements IInventory, /*IM
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer p_70300_1_) {
-		return false;
+		return true;
 	}
 
 	@Override

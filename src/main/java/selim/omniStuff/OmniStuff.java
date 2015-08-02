@@ -9,9 +9,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.EnumHelper;
 import selim.omniStuff.boots.OmniBoots;
 import selim.omniStuff.charger.ChargerBlock;
+import selim.omniStuff.charger.gui.HandlerGui;
 import selim.omniStuff.chestplate.OmniChestplate;
 import selim.omniStuff.crafting.MyRecipies;
-import selim.omniStuff.gui.charger.HandlerGui;
 import selim.omniStuff.helmet.OmniGoggles;
 import selim.omniStuff.items.*;
 import selim.omniStuff.keys.KeyBindings;
@@ -85,6 +85,11 @@ public class OmniStuff {
     	public static Item stepModule = new StepAssistModule();
     	public static Item fallModule = new FallModule();
     	public static Item parachuteModule = new ParachuteModule();
+    	
+    	public static Item[] allModules = {paxelModule, wrenchModule, potionsModule, revealingModule,
+    			revealingModule, terminalModule, vanillaUtilsModule, stepModule, fallModule,
+    			parachuteModule
+    	};
     	
     	// Register Blocks
     	public static Block charger = new ChargerBlock();

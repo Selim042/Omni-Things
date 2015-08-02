@@ -2,8 +2,6 @@ package selim.omniStuff.helmet;
 
 import java.util.List;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,7 +15,6 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
-import openmods.utils.ItemUtils;
 import openperipheral.addons.api.ITerminalItem;
 import openperipheral.addons.api.TerminalRegisterEvent;
 import openperipheral.addons.glasses.TerminalUtils;
@@ -30,6 +27,8 @@ import thaumcraft.api.IGoggles;
 import thaumcraft.api.IVisDiscountGear;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.nodes.IRevealer;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class OmniGoggles extends OmniThing implements
 	IRevealer, IGoggles, IVisDiscountGear, ITerminalItem {
@@ -57,18 +56,18 @@ public class OmniGoggles extends OmniThing implements
 		if (super.displayToolip) {
 			if (itemStack.stackTagCompound != null) {
 				list.add("Modules:");
-				boolean gogglesOfRevealing = itemStack.stackTagCompound.getBoolean("gogglesOfRevealing");
+				boolean gogglesOfRevealing = itemStack.stackTagCompound.getBoolean("item.revealingModule");
 				if ((gogglesOfRevealing == true) && (LoadConfig.enableGogglesOfRevealing)) {
 					list.add(" - Goggles of Revealing");
 					list.add("     " + EnumChatFormatting.DARK_PURPLE + "Vis discount: 5%");
 				}
-				boolean terminalGlasses = itemStack.stackTagCompound.getBoolean("terminalGlasses");
+				boolean terminalGlasses = itemStack.stackTagCompound.getBoolean("item.terminalModule");
 				if ((terminalGlasses == true) && (LoadConfig.enableTerminalGlasses)) {
 					list.add(" - Terminal Glasses");
 					Long guid = extractGuid(itemStack);
 					if (guid != null) list.add("     " + StatCollector.translateToLocalFormatted("openperipheral.misc.key", TerminalUtils.formatTerminalId(guid)));
 				}
-				boolean nightVision = itemStack.stackTagCompound.getBoolean("potionsModule");
+				boolean nightVision = itemStack.stackTagCompound.getBoolean("item.potionsModule");
 				if (nightVision == true) {
 					list.add(" - Potions Module");
 					list.add("     - Night Vision");
@@ -139,7 +138,8 @@ public class OmniGoggles extends OmniThing implements
 
 	@Override
 	public void bindToTerminal(ItemStack stack, long guid) {
-		NBTTagCompound tag = ItemUtils.getItemTag(stack);
+		if (stack.stackTagCompound == null) stack.stackTagCompound = new NBTTagCompound();
+		NBTTagCompound tag = stack.stackTagCompound;
 
 		NBTTagCompound openPTag = (NBTTagCompound)tag.getTag(OPENP_TAG);
 		if (openPTag == null) {
@@ -151,7 +151,8 @@ public class OmniGoggles extends OmniThing implements
 	}
 	
 	private static Long extractGuid(ItemStack stack) {
-		NBTTagCompound tag = ItemUtils.getItemTag(stack);
+		if (stack.stackTagCompound == null) stack.stackTagCompound = new NBTTagCompound();
+		NBTTagCompound tag = stack.stackTagCompound;
 		if (!tag.hasKey(OPENP_TAG)) return null;
 
 		NBTTagCompound openp = tag.getCompoundTag(OPENP_TAG);

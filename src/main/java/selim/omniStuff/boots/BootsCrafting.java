@@ -44,7 +44,7 @@ public class BootsCrafting implements IRecipe {
 			for (int i = 0; i < upgradeSlots.length; i++) {
 				for (int u = 0; u < upgrades.length; u++) {
 					if ((upgradeSlots[i] != null) && upgrades[u].equals(upgradeSlots[i].getItem())) {
-						result.stackTagCompound.setBoolean(upgradeID[u], true);
+						result.stackTagCompound.setBoolean(upgrades[u].getUnlocalizedName(), true);
 						result.stackTagCompound.setInteger("numModules", 1);
 					}
 					else {

@@ -57,12 +57,12 @@ public class OmniBoots extends ItemArmor implements IEnergyContainerItem {
 		}
 		if (itemStack.stackTagCompound != null) {
 			list.add("Modules:");
-            boolean potionsModule = itemStack.stackTagCompound.getBoolean("potionsModule");
+            boolean potionsModule = itemStack.stackTagCompound.getBoolean("item.potionsModule");
             if (potionsModule == true) {
               	list.add(" - Potions Module");
               	list.add("     - Speed");
             }
-            boolean fall = itemStack.stackTagCompound.getBoolean("fallModule");
+            boolean fall = itemStack.stackTagCompound.getBoolean("item.fallModule");
             if (fall == true) {
             	list.add(" - Light Fall Module");
             }

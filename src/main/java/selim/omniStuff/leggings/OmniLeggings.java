@@ -58,12 +58,12 @@ public class OmniLeggings extends ItemArmor implements IEnergyContainerItem {
 		}
 		if (itemStack.stackTagCompound != null) {
 			list.add("Modules:");
-            boolean potionsModule = itemStack.stackTagCompound.getBoolean("potionsModule");
+            boolean potionsModule = itemStack.stackTagCompound.getBoolean("item.potionsModule");
             if (potionsModule == true) {
               	list.add(" - Potions Module");
               	list.add("     - Jump Boost");
             }
-            boolean step = itemStack.stackTagCompound.getBoolean("stepModule");
+            boolean step = itemStack.stackTagCompound.getBoolean("item.stepModule");
             if (step == true) {
             	list.add(" - Step Assist Module");
             }

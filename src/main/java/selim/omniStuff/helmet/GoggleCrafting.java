@@ -19,7 +19,7 @@ public class GoggleCrafting implements IRecipe {
 		ItemStack referenceStack = new ItemStack(OmniStuff.omniGoggles);
 		boolean valid = false;
 		ItemStack stack4 = p_77569_1_.getStackInSlot(4);
-		if ((stack4 !=null) && (stack4.getItem().equals(referenceStack.getItem()))) {
+		if ((stack4 != null) && (stack4.getItem().equals(referenceStack.getItem()))) {
 			valid = true;
 		}
 		return valid;
@@ -30,7 +30,7 @@ public class GoggleCrafting implements IRecipe {
 		Item[] upgrades = {OmniStuff.revealingModule,
 								OmniStuff.terminalModule,
 								OmniStuff.potionsModule};
-		String[] upgradeID = {"gogglesOfRevealing", "terminalGlasses", "potionsModule"};
+		String[] upgradeID = {"revealingModule", "terminalModule", "potionsModule"};
 		
 		boolean valid = true;
 		ItemStack stack4 = craftingTable.getStackInSlot(4);
@@ -47,7 +47,7 @@ public class GoggleCrafting implements IRecipe {
 			for (int i = 0; i < upgradeSlots.length; i++) {
 				for (int u = 0; u < upgrades.length; u++) {
 					if ((upgradeSlots[i] != null) && upgrades[u].equals(upgradeSlots[i].getItem())) {
-						result.stackTagCompound.setBoolean(upgradeID[u], true);
+						result.stackTagCompound.setBoolean(upgrades[u].getUnlocalizedName(), true);
 						result.stackTagCompound.setInteger("numModules", 1);
 					}
 					else {

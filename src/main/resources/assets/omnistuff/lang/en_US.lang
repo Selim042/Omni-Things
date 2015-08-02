@@ -2,7 +2,6 @@ item.omniGoggles.name=§6Omni-Goggles§r
 item.omniChestplate.name=§6Omni-Chestplate§r
 item.omniLeggings.name=§6Omni-Leggings§r
 item.omniBoots.name=§6Omni-Boots§r
-
 item.omniTool.name=§6Omni-Tool§r
 
 item.bindingCatalyst.name=Binding Catalyst
@@ -15,6 +14,8 @@ item.vanillaUtilsModule.name=Vanilla Utilities Module
 item.fallModule.name=Fall Module
 item.stepAssistModule.name=Step Assist Module
 item.parachuteModule.name=Parachute Module
+
+tile.charger.name=Omni-Thing Charger
 
 key.categories.OmniStuff=Omni-Stuff
 key.nightVisionToggle=Toggle Night Vision Module
