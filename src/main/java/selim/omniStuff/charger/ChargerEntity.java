@@ -26,6 +26,10 @@ public class ChargerEntity extends TileEnergyHandler implements IInventory, /*IM
 
     private ArrayList aList = new ArrayList();
     
+    public EnergyStorage getStorage() {
+    	return storage;
+    }
+    
     @Override
 	public void readFromNBT(NBTTagCompound nbt) {
 
@@ -43,9 +47,10 @@ public class ChargerEntity extends TileEnergyHandler implements IInventory, /*IM
 		storage.writeToNBT(nbt);
 		
 		// ItemStack
-		NBTTagCompound stack = new NBTTagCompound();
-        this.storedItem.writeToNBT(stack);
-        nbt.setTag("storedItem", stack);
+		if (this.storedItem != null) {
+			this.storedItem.writeToNBT(nbt);
+			nbt.setTag("storedItem", nbt);
+		}
 	}
 	
 	@Override

@@ -17,15 +17,15 @@ public class ChargerContainer extends Container {
 	protected ChargerEntity tileEntity;
 	
 	public ChargerContainer(InventoryPlayer invPlayer, 
-          IInventory parInventoryGrinder) {
-		ModuleInv moduleInv = new ModuleInv(parInventoryGrinder.getStackInSlot(0));
+          IInventory inventoryCharger) {
+		ModuleInv moduleInv = new ModuleInv(inventoryCharger.getStackInSlot(0));
 		
-		this.addSlotToContainer(new ThingSlot(parInventoryGrinder, -1, 147, 13));
-		this.addSlotToContainer(new SlotEnergy(parInventoryGrinder, -2, 8, 52));
+		this.addSlotToContainer(new ThingSlot(inventoryCharger, 0, 147, 13));
+		this.addSlotToContainer(new SlotEnergy(inventoryCharger, 1, 8, 52));
 		
 		// add module slots
 		for (int i = 0; i < 7; i++) {
-			this.addSlotToContainer(new Slot(moduleInv, i, 44 + (i * 18), 52));
+			this.addSlotToContainer(new Slot(moduleInv, i + 2, 44 + (i * 18), 52));
 		}
 		
 		bindPlayerInventory(invPlayer);

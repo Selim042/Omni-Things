@@ -28,7 +28,7 @@ public class OmniThing extends ItemArmor implements IEnergyContainerItem {
 	String[] moduleID;
 	
 	int rfIn = 1280;
-	int rfOut = 640;
+	int rfOut = 0;
 	int rfPerModule = 5;
 	int maxRfStored = 4000000;
 	

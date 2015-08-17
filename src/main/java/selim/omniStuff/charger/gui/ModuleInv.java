@@ -2,6 +2,7 @@ package selim.omniStuff.charger.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import selim.omniStuff.OmniStuff;
 
@@ -11,15 +12,17 @@ public class ModuleInv implements IInventory {
 	
 	ItemStack[] modules;
 	
+	Item[] allModules = OmniStuff.allModules;
+	
 	public ModuleInv(ItemStack thing) {
 		omniThing = thing;
 	}
 	
 	void determineSlots() {
 		if ((omniThing != null) && (omniThing.stackTagCompound != null)) {
-			for (int i = 0; i < OmniStuff.allModules.length; i++) {
-				if (omniThing.stackTagCompound.getBoolean(OmniStuff.allModules[i].getUnlocalizedName())) {
-					modules[modules.length] = new ItemStack(OmniStuff.allModules[i]);
+			for (int i = 0; i < this.allModules.length; i++) {
+				if (omniThing.stackTagCompound.getBoolean(this.allModules[i].getUnlocalizedName())) {
+					this.modules[this.modules.length] = new ItemStack(this.allModules[i]);
 				}
 			}
 		}

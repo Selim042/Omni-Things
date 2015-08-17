@@ -21,7 +21,7 @@ public class HandlerGui implements IGuiHandler {
 		TileEntity tileEntity = world.getTileEntity(x, y, z);
 		
 		if (tileEntity != null) {
-			return new ContainerGui(player.inventory, (IInventory) tileEntity);
+			return new ContainerGui(player.inventory, tileEntity);
 		}
 		
 		return null;

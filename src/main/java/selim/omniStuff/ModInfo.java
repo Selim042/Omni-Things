@@ -8,8 +8,8 @@ public class ModInfo {
 	public static final String PROXY_CLIENT = "selim.omniStuff.proxy.ClientProxy";
 	public static final String DEPENDENCIES = "";
 	public static final String[] CREDITS = {
-			"Selim_042", "mixed",
-			"Element_42", "textures",
-			"AquaticAbyss", "textures"
-		};
+		"Selim_042", "mixed",
+		"Element_42", "textures",
+		"AquaticAbyss", "textures"
+	};
 }
